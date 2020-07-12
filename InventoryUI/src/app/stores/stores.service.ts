@@ -19,7 +19,7 @@ export class StoresService {
     return this.apiService.get('http://localhost:8080/api/stores');
   }
 
-  saveBook(store: Store): Observable<Stores> {
+  saveBook(store: Store): Observable<Store[]> {
     return this.apiService.post('http://localhost:8080/api/stores', store);
   }
 

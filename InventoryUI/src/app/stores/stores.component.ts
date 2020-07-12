@@ -87,7 +87,7 @@ export class StoresComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.storesService.saveBook(store).subscribe(
       (response) => {
-        this.storeList = response.stores;
+        this.storeList = response;
         this.loading = false;
         this.messageService.add({
           severity: 'success',

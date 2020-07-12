@@ -43,6 +43,7 @@ HELP.md
 
 # dependencies
 **/node_modules
+**/package-lock.json
 
 # profiling files
 **/chrome-profiler-events*.json
@@ -74,7 +75,8 @@ HELP.md
 **/yarn-error.log
 **/testem.log
 **/typings
-
+**/.mvn
+**/main
 # System Files
 .DS_Store
 Thumbs.db
