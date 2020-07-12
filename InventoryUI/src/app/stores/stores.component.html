@@ -1,0 +1,118 @@
+<div
+  class="toolbar"
+  role="banner"
+>
+  <img
+    width="40"
+    alt="Angular Logo"
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+  />
+  <span>Welcome to Store</span>
+  <div class="spacer"></div>
+  <a
+    aria-label="Angular on twitter"
+    target="_blank"
+    rel="noopener"
+    href="https://twitter.com/angular"
+    title="Twitter"
+  >
+    <i class="fab fa-github fa-10x"></i>
+  </a>
+
+</div>
+<div style="height: 65px;"></div>
+<div>
+  <p-table
+    #dt
+    [value]="storeList"
+    dataKey="id"
+    styleClass="ui-table-stores"
+    [rowHover]="true"
+    [rows]="10"
+    [loading]="loading"
+    [paginator]="false"
+    [filterDelay]="0"
+  >
+    <ng-template pTemplate="caption">
+      <div class="row">
+        <h3>List of Stores</h3>
+      </div>
+      <div class="row">
+        <div style="float: left;">
+          <p-button
+            label="Add Store"
+            icon="pi pi-check"
+            iconPos="left"
+            (click)="showNewStoreModal($event)"
+          ></p-button>
+        </div>
+        <div style="margin-left: 20px;">
+          <p-button
+            label="Refresh"
+            icon="pi pi-refresh"
+            iconPos="left"
+            (click)="getAllStores()"
+          ></p-button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id" style="width: 50px;">Id <p-sortIcon field="id"></p-sortIcon>
+        </th>
+        <th pSortableColumn="pname">Part Name <p-sortIcon field="pname"></p-sortIcon>
+        </th>
+        <th pSortableColumn="model">Model <p-sortIcon field="model"></p-sortIcon>
+        </th>
+        <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon>
+        </th>
+        <th pSortableColumn="partnumber">Part Number <p-sortIcon field="partnumber"></p-sortIcon>
+        </th>
+        <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
+        </th>
+        <th pSortableColumn="cost">Cost <p-sortIcon field="cost"></p-sortIcon>
+        </th>
+        <th pSortableColumn="instock">Stock <p-sortIcon field="instock"></p-sortIcon>
+        </th>
+        <th pSortableColumn="sold">Sold <p-sortIcon field="sold"></p-sortIcon>
+        </th>
+        <th pSortableColumn="notes">Notes <p-sortIcon field="notes"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-store
+    >
+      <tr class="ui-selectable-row">
+        <td>{{store.id}}</td>
+        <td>{{store.pname}}</td>
+        <td>{{store.model}}</td>
+        <td>{{store.description}}</td>
+        <td>{{store.partnumber}}</td>
+        <td>{{store.category}}</td>
+        <td>{{store.cost}}</td>
+        <td>{{store.instock}}</td>
+        <td>{{store.sold}}</td>
+        <td>{{store.notes}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td
+          colspan="12"
+          style="text-align:center"
+        >No store found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p-dialog
+  header="New store details"
+  [(visible)]="modalDisplay"
+  [style]="{width: '700px'}"
+>
+  <app-store-form></app-store-form>
+</p-dialog>
+
+<p-toast position="top-center"></p-toast>
