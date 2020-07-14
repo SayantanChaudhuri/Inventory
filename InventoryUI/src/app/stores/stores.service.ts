@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Store } from './model/store';
 import { Subject, Observable } from 'rxjs';
 import { ApiService } from '../api.service';
-import { Stores } from './model/stores';
 
 @Injectable({
   providedIn: 'root',
@@ -10,29 +9,37 @@ import { Stores } from './model/stores';
 export class StoresService {
   constructor(private apiService: ApiService) {}
 
-  private _store: Store;
-
   // tslint:disable-next-line:variable-name
   private _storeSubject: Subject<Store> = new Subject();
+  // tslint:disable-next-line:variable-name
+  private _storeSubmitSubject: Subject<Store> = new Subject();
 
   getAllStores(): Observable<Store[]> {
     return this.apiService.get('http://localhost:8080/api/stores');
   }
 
-  saveBook(store: Store): Observable<Store[]> {
+  saveStore(store: Store): Observable<Store[]> {
     return this.apiService.post('http://localhost:8080/api/stores', store);
   }
 
-  public get store(): Store {
-    return this._store;
+  updateStore(store: Store): Observable<Store[]> {
+    return this.apiService.put(
+      'http://localhost:8080/api/stores/' + store.id,
+      store
+    );
   }
 
-  public set store(store: Store) {
-    this._store = store;
-    this._storeSubject.next(this._store);
+  deleteStore(store: Store): Observable<Store[]> {
+    return this.apiService.delete(
+      'http://localhost:8080/api/stores/' + store.id
+    );
   }
 
-  public get storeObservable(): Observable<Store> {
-    return this._storeSubject.asObservable();
+  public get storeSubject(): Subject<Store> {
+    return this._storeSubject;
+  }
+
+  public get storeSubmitSubject(): Subject<Store> {
+    return this._storeSubmitSubject;
   }
 }

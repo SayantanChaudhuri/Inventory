@@ -58,7 +58,12 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="id" style="width: 50px;">Id <p-sortIcon field="id"></p-sortIcon>
+        <th style="width: 40px;"></th>
+        <th style="width: 40px;"></th>
+        <th
+          pSortableColumn="id"
+          style="width: 50px;"
+        >Id <p-sortIcon field="id"></p-sortIcon>
         </th>
         <th pSortableColumn="pname">Part Name <p-sortIcon field="pname"></p-sortIcon>
         </th>
@@ -85,6 +90,16 @@
       let-store
     >
       <tr class="ui-selectable-row">
+        <td style="width: 40px;"><i
+            class="pi pi-pencil"
+            title="Edit"
+            (click)="showUpdateStoreModal(store)"
+          ></i></td>
+        <td style="width: 40px;"><i
+            class="pi pi-trash"
+            title="Delete"
+            (click)="showDeleteStoreModal(store)"
+          ></i></td>
         <td>{{store.id}}</td>
         <td>{{store.pname}}</td>
         <td>{{store.model}}</td>
@@ -108,11 +123,15 @@
   </p-table>
 </div>
 <p-dialog
-  header="New store details"
+  [header]="modalHeader"
   [(visible)]="modalDisplay"
   [style]="{width: '700px'}"
 >
   <app-store-form></app-store-form>
 </p-dialog>
-
+<p-confirmDialog
+  header="Delete"
+  message="Are you want to delete?"
+  icon="pi pi-question-circle"
+></p-confirmDialog>
 <p-toast position="top-center"></p-toast>

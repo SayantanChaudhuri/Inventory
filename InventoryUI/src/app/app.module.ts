@@ -8,21 +8,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+
 import { StoreFormComponent } from './stores/store-form/store-form.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    StoresComponent,
-    StoreFormComponent,
-  ],
+  declarations: [AppComponent, StoresComponent, StoreFormComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -32,9 +29,10 @@ import { StoreFormComponent } from './stores/store-form/store-form.component';
     TableModule,
     ButtonModule,
     ToastModule,
-    DialogModule
+    DialogModule,
+    ConfirmDialogModule
   ],
-  providers: [MessageService],
-  bootstrap: [AppComponent]
+  providers: [MessageService, ConfirmationService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
